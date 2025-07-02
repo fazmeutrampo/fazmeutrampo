@@ -728,6 +728,12 @@
             <a href="https://www.instagram.com/fazmeutrampo" class="social-icon">
               <i class="fab fa-instagram"></i>
             </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-discord"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -737,7 +743,38 @@
       </div>
     </div>
   </footer>
+  <nav class="navbar">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold text-white neon-glow">
+      <i class="fas fa-rocket mr-2 text-purple-400"></i>FazMeuTrampo
+    </a>
 
+    <div class="hidden md:flex space-x-6">
+      <a href="#produtos" class="text-gray-300 hover:text-white transition">Planos</a>
+      <a href="#como-funciona" class="text-gray-300 hover:text-white transition">Como Funciona</a>
+      <a href="#depoimentos" class="text-gray-300 hover:text-white transition">Depoimentos</a>
+      <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
+    </div>
+
+    <a href="https://wa.me/+554195055717" class="neon-btn hidden md:inline-block">
+      <i class="fab fa-whatsapp mr-2"></i> Contato
+    </a>
+
+    <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden mt-4 flex-col space-y-4 text-center hidden">
+    <a href="#produtos" class="block text-gray-300 hover:text-white">Planos</a>
+    <a href="#como-funciona" class="block text-gray-300 hover:text-white">Como Funciona</a>
+    <a href="#depoimentos" class="block text-gray-300 hover:text-white">Depoimentos</a>
+    <a href="#faq" class="block text-gray-300 hover:text-white">FAQ</a>
+    <a href="https://wa.me/+554195055717" class="neon-btn mt-4 mx-auto inline-block">
+      <i class="fab fa-whatsapp mr-2"></i> Contato
+    </a>
+  </div>
+</nav>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({
@@ -777,11 +814,10 @@
         faqItem.classList.toggle('active');
       });
     });
-    
-    document.querySelector('.md\\:hidden').addEventListener('click', () => {
-      alert('em desenvolvimento. - ass: slayer');
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
     });
-    
     window.addEventListener('load', createParticles);
   </script>
 </body>
