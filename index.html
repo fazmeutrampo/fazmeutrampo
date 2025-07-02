@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FazMeuTrampo!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#9b4de0',
+            secondary: '#6c28a8',
+            dark: '#0e0e0e',
+            darker: '#0a0613',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --neon-primary: #9b4de0;
+      --neon-secondary: #c782ff;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0a0613, #0e0e0e);
+      color: #E0E0E0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(155, 77, 224, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(108, 40, 168, 0.1) 0%, transparent 20%);
+      z-index: -1;
+    }
+    
+    .neon-glow {
+      text-shadow: 0 0 10px rgba(155, 77, 224, 0.7), 0 0 20px rgba(155, 77, 224, 0.5);
+    }
+    
+    .neon-border {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .neon-border::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #9b4de0, #c782ff, #6c28a8);
+      z-index: -1;
+      border-radius: inherit;
+      animation: neon-border-animate 3s linear infinite;
+      background-size: 400%;
+    }
+    
+    .neon-border::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      z-index: -1;
+      border-radius: inherit;
+    }
+    
+    @keyframes neon-border-animate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(155, 77, 224, 0.15) 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(108, 40, 168, 0.15) 0%, transparent 25%);
+      z-index: -1;
+    }
+    
+    .hero-content {
+      background: rgba(15, 10, 25, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 3rem;
+      text-align: center;
+      max-width: 800px;
+      width: 90%;
+      z-index: 1;
+      position: relative;
+      box-shadow: 0 0 40px rgba(155, 77, 224, 0.2);
+    }
+    
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(10, 6, 19, 0.9);
+      border-bottom: 1px solid rgba(155, 77, 224, 0.2);
+    }
+    
+    .neon-btn {
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      background: linear-gradient(to right, #9b4de0, #6c28a8);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(155, 77, 224, 0.5);
+      transition: all .3s ease-in-out;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .neon-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #c782ff, #9b4de0);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    
+    .neon-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(199, 130, 255, 0.8);
+    }
+    
+    .neon-btn:hover::before {
+      opacity: 1;
+    }
+    
+    .neon-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(30, 25, 45, 0.8), rgba(20, 15, 35, 0.8));
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(155, 77, 224, 0.3);
+    }
+    
+    .card-img {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .card-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(20, 15, 35, 0.9), transparent);
+    }
+    
+    .card-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: .5rem;
+    }
+    
+    .card-content p {
+      font-size: 1rem;
+      color: #bbb;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    
+    .testimonial-card {
+      background: rgba(30, 25, 45, 0.6);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(155, 77, 224, 0.2);
+    }
+    
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(155, 77, 224, 0.5);
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 2rem 1rem;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .sticky-cta {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 90%;
+        text-align: center;
+      }
+      
+      .navbar {
+        padding: 1rem;
+      }
+    }
+    
+    .sticky-cta {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(155, 77, 224, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(155, 77, 224, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(155, 77, 224, 0); }
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #9b4de0, #c782ff);
+      border-radius: 2px;
+    }
+    
+    .faq-item {
+      background: rgba(30, 25, 45, 0.6);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(155, 77, 224, 0.2);
+    }
+    
+    .faq-question {
+      padding: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      background: rgba(155, 77, 224, 0.1);
+    }
+    
+    .faq-answer {
+      padding: 0 1.25rem 1.25rem;
+      color: #bbb;
+      display: none;
+    }
+    
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    
+    .faq-item.active .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+    
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(155, 77, 224, 0.2);
+      color: #c782ff;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: rgba(155, 77, 224, 0.4);
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+  
+  <nav class="navbar">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-white neon-glow">
+        <i class="fas fa-rocket mr-2 text-purple-400"></i>FazMeuTrampo
+      </a>
+      <div class="hidden md:flex space-x-6">
+        <a href="#produtos" class="text-gray-300 hover:text-white transition">Planos</a>
+        <a href="#como-funciona" class="text-gray-300 hover:text-white transition">Como Funciona</a>
+        <a href="#depoimentos" class="text-gray-300 hover:text-white transition">Depoimentos</a>
+        <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
+      </div>
+      <a href="https://wa.me/+554195055717" class="neon-btn hidden md:inline-block">
+        <i class="fab fa-whatsapp mr-2"></i> Contato
+      </a>
+      <button class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  
+  <header class="hero">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+      <h1 class="hero-title text-4xl md:text-5xl font-extrabold mb-4 text-white">
+        <span class="neon-glow">FazMeuTrampo</span> - Seu Trampo Resolvido!
+      </h1>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Quer não se preocupar em fazer? Soluções completas para Inglês Paraná e Khan Academy.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#produtos" class="neon-btn" data-aos="zoom-in" data-aos-delay="200">
+          <i class="fas fa-gem mr-2"></i> Ver Planos
+        </a>
+        <a href="https://wa.me/+554195055717" class="neon-btn bg-transparent border-2 border-purple-600" data-aos="zoom-in" data-aos-delay="400">
+          <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section id="produtos" class="py-16 px-4 bg-darker">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12 text-white section-title">Planos Disponíveis</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card neon-border" data-aos="fade-up">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1470&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-bold">Combo Inglês Paraná + Khan</h3>
+              <span class="bg-purple-900 text-purple-200 text-sm px-3 py-1 rounded-full">Popular</span>
+            </div>
+            <p class="text-gray-300 mb-4">Tranquilidade total. Tudo pronto, por três meses completos.</p>
+            <div class="mt-auto">
+              <a href="https://wa.me/+554195055717" class="neon-btn w-full text-center">R$29,99</a>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="card neon-border" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1470&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3 class="text-xl font-bold mb-2">Só Inglês Paraná (Trimestre)</h3>
+            <p class="text-gray-300 mb-4">Sem estresse. A plataforma 100% feita por mim pra você.</p>
+            <div class="mt-auto">
+              <a href="https://wa.me/+554195055717" class="neon-btn w-full text-center">R$14,99</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card neon-border" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1374&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3 class="text-xl font-bold mb-2">Só Inglês Paraná (Ano Inteiro)</h3>
+            <p class="text-gray-300 mb-4">O ano inteiro resolvido. Completo, sem faltar nada.</p>
+            <div class="mt-auto">
+              <a href="https://wa.me/+554195055717" class="neon-btn w-full text-center">R$19,99</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card neon-border" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1470&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3 class="text-xl font-bold mb-2">Só Khan Academy (Trimestre)</h3>
+            <p class="text-gray-300 mb-4">Sem dor de cabeça. Trimestre inteirinho feito pra você.</p>
+            <div class="mt-auto">
+              <a href="https://wa.me/+554195055717" class="neon-btn w-full text-center">R$16,99</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card neon-border" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1470&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3 class="text-xl font-bold mb-2">Khan Academy (Ano Inteiro)</h3>
+            <p class="text-gray-300 mb-4">Indisponível. O sistema do Khan não libera o ano completo.</p>
+            <div class="mt-auto">
+              <button class="neon-btn w-full text-center bg-gray-700 cursor-not-allowed opacity-70" disabled>
+                Indisponível
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card neon-border" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1470&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3 class="text-xl font-bold mb-2">Solução Personalizada</h3>
+            <p class="text-gray-300 mb-4">Precisa de algo específico? Entre em contato para uma solução sob medida.</p>
+            <div class="mt-auto">
+              <a href="https://wa.me/+554195055717" class="neon-btn w-full text-center bg-gradient-to-r from-blue-500 to-purple-600">
+                <i class="fas fa-comments mr-2"></i> Contatar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <p class="text-center text-gray-400 mt-12 max-w-2xl mx-auto">
+        <i class="fas fa-info-circle mr-2 text-purple-400"></i> Pra contratar: só mandar o @escola e a senha via WhatsApp. Seu login permanece seguro e não armazenamos seus dados.
+      </p>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="py-16 px-4 bg-darker">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-16 text-white section-title">Como Funciona</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center" data-aos="fade-up">
+          <div class="w-20 h-20 bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-comment-alt text-3xl text-purple-400"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">1. Entre em Contato</h3>
+          <p class="text-gray-400">Mande uma mensagem pelo WhatsApp informando qual plano deseja adquirir.</p>
+        </div>
+        
+        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-20 h-20 bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-user-lock text-3xl text-purple-400"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">2. Envie os Dados</h3>
+          <p class="text-gray-400">Forneça seu @escola e senha. Seus dados permanecem confidenciais.</p>
+        </div>
+        
+        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-20 h-20 bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-check-circle text-3xl text-purple-400"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">3. Pronto! Fique de Boa</h3>
+          <p class="text-gray-400">Seu trampo será resolvido e você receberá confirmação quando tudo estiver pronto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="py-16 px-4 bg-darker">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-16 text-white section-title">O Que Dizem Nossos Clientes</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="testimonial-card" data-aos="fade-up">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center mr-4">
+              <span class="text-xl">?</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Anônimo</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300">
+            "Comprei o combo de Inglês Paraná e Khan Academy e foi a melhor coisa que fiz esse ano! Tudo resolvido em 2 dias. Recomendo demais!"
+          </p>
+        </div>
+        
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center mr-4">
+              <span class="text-xl">?</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Anônimo</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300">
+            "Estava atrasado em tudo no Inglês Paraná e o FazMeuTrampo resolveu meu trimestre inteiro em um final de semana! Preço justo e serviço rápido."
+          </p>
+        </div>
+        
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center mr-4">
+              <span class="text-xl">?</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Anônimo</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300">
+            "Contratei para o Khan Academy e fiquei impressionada com a eficiência. Resolveram tudo certinho e ainda me avisaram quando concluíram. Vale cada centavo!"
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="py-16 px-4 bg-darker">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-16 text-white section-title">Perguntas Frequentes</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="faq-item" data-aos="fade-up">
+          <div class="faq-question">
+            <span>Como faço para contratar o serviço?</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Basta entrar em contato pelo WhatsApp, informar qual plano você deseja e enviar seu @escola e senha. Após a confirmação do pagamento, começaremos a resolver suas atividades.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="50">
+          <div class="faq-question">
+            <span>Meus dados estão seguros?</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Sim! Utilizamos seus dados apenas para acessar as plataformas educacionais e realizar as atividades. Não armazenamos suas credenciais após a conclusão do serviço.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="faq-question">
+            <span>Quanto tempo leva para concluir minhas atividades?</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </div>
+          <div class="faq-answer">
+            <p>O prazo varia conforme o plano escolhido e a quantidade de atividades pendentes. Geralmente, concluímos um trimestre em 2-3 dias úteis. Para urgências, entre em contato para verificar a disponibilidade.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="150">
+          <div class="faq-question">
+            <span>Como é feito o pagamento?</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Aceitamos PIX e transferência bancária. O pagamento é realizado após a confirmação de disponibilidade e antes do início dos trabalhos.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="faq-question">
+            <span>O que acontece se minha escola mudar as atividades?</span>
+            <i class="fas fa-chevron-down transition-transform"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Se ocorrerem mudanças significativas durante o período contratado, faremos os ajustes necessários sem custo adicional para garantir que tudo seja concluído conforme combinado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 bg-gradient-to-r from-purple-900 to-indigo-900">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white" data-aos="fade-up">
+        Pronto para Simplificar Sua Vida Escolar?
+      </h2>
+      <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        Não perca tempo com tarefas intermináveis. Deixe com a gente e aproveite seu tempo livre!
+      </p>
+      <a href="https://wa.me/+554195055717" class="neon-btn inline-block text-lg px-8 py-4" data-aos="zoom-in" data-aos-delay="200">
+        <i class="fab fa-whatsapp mr-2"></i> Contratar Agora
+      </a>
+    </div>
+  </section>
+
+  <a href="https://wa.me/+554195055717" class="sticky-cta neon-btn hidden md:inline-block" data-aos="zoom-in">
+    <i class="fab fa-whatsapp mr-2"></i> Quero Agora
+  </a>
+
+  <footer class="py-12 px-4 bg-darker border-t border-gray-800">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">
+            <i class="fas fa-rocket mr-2 text-purple-400"></i>FazMeuTrampo
+          </h3>
+          <p class="text-gray-400">
+            Soluções educacionais completas para você focar no que realmente importa.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Links Rápidos</h4>
+          <ul class="space-y-2">
+            <li><a href="#produtos" class="text-gray-400 hover:text-white transition">Planos</a></li>
+            <li><a href="#como-funciona" class="text-gray-400 hover:text-white transition">Como Funciona</a></li>
+            <li><a href="#depoimentos" class="text-gray-400 hover:text-white transition">Depoimentos</a></li>
+            <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Contato</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center text-gray-400">
+              <i class="fab fa-whatsapp mr-2 text-green-400"></i>
+              <a href="https://wa.me/+554195055717">(41) 95055717</a>
+            </li>
+            <li class="flex items-center text-gray-400">
+              <i class="fas fa-envelope mr-2 text-purple-400"></i>
+              fazmeutrampo@proton.me
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Siga-nos</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+        <p>&copy; 2025 FazMeuTrampo. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50
+    });
+    
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 5 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        const duration = Math.random() * 20 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particle.style.opacity = Math.random() * 0.7 + 0.1;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        faqItem.classList.toggle('active');
+      });
+    });
+    
+    document.querySelector('.md\\:hidden').addEventListener('click', () => {
+      alert('Menu mobile seria implementado aqui!');
+    });
+    
+    window.addEventListener('load', createParticles);
+  </script>
+</body>
+</html>
