@@ -824,7 +824,7 @@
     const ipData = await response.json();
 
     // Verifica se o sucesso veio como true
-    if (ipData.success !== false) {
+    if (ipData.success !== true) {
       console.warn("API não retornou sucesso:", ipData);
       return; // Sai sem enviar nada
     }
